@@ -2,6 +2,7 @@ package ui_tests;
 
 import dto.User;
 import manager.AppManager;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
@@ -18,6 +19,7 @@ public class LoginTests extends AppManager {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginRegistrationForm("alex1khalif9999@gmail.com", "Qwerty474849!");
         loginPage.clickBtnLoginForm();
+        Assert.assertTrue(homePage.isAddInDisplayed(), "ERROR");
 
     }
 
@@ -31,6 +33,7 @@ public class LoginTests extends AppManager {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginRegistrationFormWithUser(user);
         loginPage.clickBtnLoginForm();
+        Assert.assertTrue(homePage.isContactsInDisplayed(), "ERROR");
 
     }
 }

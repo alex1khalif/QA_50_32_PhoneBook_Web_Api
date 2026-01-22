@@ -16,9 +16,23 @@ public class HomePage extends BasePage{
     }
     @FindBy(xpath = "//a[text()='LOGIN']")
     WebElement btnLogin;
+    @FindBy(xpath = "//a[text()='ADD']")
+    WebElement btnAdd;
+    @FindBy(xpath = "//a[text()='CONTACTS']")
+    WebElement btnContacts;
 
     public void clickBtnLogin()
     {
         btnLogin.click();
+    }
+
+    public boolean isAddInDisplayed()
+    {
+        return isElementDisplayed(btnAdd);
+    }
+
+    public boolean isContactsInDisplayed()
+    {
+        return isElementDisplayed(btnContacts);
     }
 }

@@ -24,6 +24,7 @@ public class LoginPage extends BasePage{
     @FindBy(css = "button[name='registration']")
     WebElement btnRegistrationForm;
 
+
     public void typeLoginRegistrationForm(String email, String password)
     {
         inputEmail.sendKeys(email);
