@@ -4,6 +4,7 @@ import dto.User;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -19,7 +20,11 @@ public class LoginTests extends AppManager {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginRegistrationForm("alex1khalif9999@gmail.com", "Qwerty474849!");
         loginPage.clickBtnLoginForm();
-        Assert.assertTrue(homePage.isAddInDisplayed(), "ERROR");
+
+        //ContactPage contactPage = new ContactPage(getDriver());
+       //Assert.assertTrue(contactPage.isAddInDisplayed(), "ERROR");
+        Assert.assertTrue(new ContactPage(getDriver()).isTextInBtnAddPresent("ADD"));
+
 
     }
 
@@ -33,7 +38,20 @@ public class LoginTests extends AppManager {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginRegistrationFormWithUser(user);
         loginPage.clickBtnLoginForm();
-        Assert.assertTrue(homePage.isContactsInDisplayed(), "ERROR");
-
+        Assert.assertTrue(new ContactPage(getDriver()).isTextInBtnSignOutPresent("Sign Out"));
+//        ContactPage contactPage = new ContactPage(getDriver());
+//        Assert.assertTrue(contactPage.isContactsInDisplayed(), "ERROR");
     }
+
+    @Test
+    public void loginNegativeTest_WrongEmail(){
+        User user = new User("alex1khalif9999gmail.com", "Qwerty474849!");
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLogin();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginRegistrationFormWithUser(user);
+        loginPage.clickBtnLoginForm();
+        Assert.assertEquals(loginPage.closeAlertReturnText(), "Wrong email or password");
+    }
+
 }

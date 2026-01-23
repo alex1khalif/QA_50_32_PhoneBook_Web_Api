@@ -25,4 +25,8 @@ public abstract class BasePage {
         return element.isDisplayed();
     }
 
+    public boolean isTextInElementPresent(WebElement element, String text){
+        return element.getText().contains(text);
+    }
+
 }
