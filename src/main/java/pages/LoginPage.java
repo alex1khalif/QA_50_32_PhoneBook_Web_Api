@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -28,6 +29,8 @@ public class LoginPage extends BasePage{
     WebElement btnLoginForm;
     @FindBy(css = "button[name='registration']")
     WebElement btnRegistrationForm;
+    @FindBy(xpath = "//div[text()='Registration failed with code 400']")
+    WebElement errorText400;
 
 
     public void typeLoginRegistrationForm(String email, String password)
@@ -58,5 +61,8 @@ public class LoginPage extends BasePage{
         alert.accept();
         return text;
     }
+
+
+
 
 }

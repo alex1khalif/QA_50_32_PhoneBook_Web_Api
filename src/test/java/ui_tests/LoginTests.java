@@ -54,4 +54,24 @@ public class LoginTests extends AppManager {
         Assert.assertEquals(loginPage.closeAlertReturnText(), "Wrong email or password");
     }
 
+    @Test
+    public void registrationNegativeTest_WrongPassword(){
+        User user = new User("alex1khalif9999@gmail.com", " ");
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLogin();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginRegistrationFormWithUser(user);
+        loginPage.clickBtnRegistrationForm();
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password format"));
+    }
+    @Test
+    public void loginNegativeTest_WrongPassword(){
+        User user = new User("alex1khalif9999@gmail.com", "123");
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLogin();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginRegistrationFormWithUser(user);
+        loginPage.clickBtnLoginForm();
+        Assert.assertEquals(loginPage.closeAlertReturnText(), "Wrong email or password");
+    }
 }
