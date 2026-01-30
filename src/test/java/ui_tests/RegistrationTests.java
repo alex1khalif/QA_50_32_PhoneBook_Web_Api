@@ -16,13 +16,13 @@ public class RegistrationTests extends AppManager {
     LoginPage loginPage;
 
     @BeforeMethod
-    public void goToRegistrationPage(){
+    public void goToRegistrationPage() {
         new HomePage(getDriver()).clickBtnLogin();
         loginPage = new LoginPage(getDriver());
     }
 
     @Test
-    public void registrationPositiveTest(){
+    public void registrationPositiveTest() {
         int i = new Random().nextInt(1000);
         User user = new User("alexkhalifa" + i + "@gmail.com", "Qwerty474849!");
         loginPage.typeLoginRegistrationFormWithUser(user);
@@ -31,7 +31,7 @@ public class RegistrationTests extends AppManager {
     }
 
     @Test
-    public void registrationPositiveTest_WithFaker(){
+    public void registrationPositiveTest_WithFaker() {
         User user = positiveUser();
         System.out.println(user);
         loginPage.typeLoginRegistrationFormWithUser(user);
@@ -39,4 +39,25 @@ public class RegistrationTests extends AppManager {
         Assert.assertTrue(new ContactPage(getDriver()).isTextInContactPageMessagePresent("No Contacts here!"));
     }
 
+    @Test
+    public void registrationNegativeTest_WrongPassword() {
+        User user = new User("alex1khalif9999@gmail.com", " ");
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLogin();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginRegistrationFormWithUser(user);
+        loginPage.clickBtnRegistrationForm();
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password format"));
+    }
+
+    @Test
+    public void registrationNegativeTest_WithFaker_EmptyPassword() {
+        User user = positiveUser();
+        user.setPassword("");
+        loginPage.typeLoginRegistrationFormWithUser(user);
+        loginPage.clickBtnRegistrationForm();
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password format"));
+
+
+    }
 }
