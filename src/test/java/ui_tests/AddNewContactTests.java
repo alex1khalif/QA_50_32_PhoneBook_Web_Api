@@ -70,4 +70,6 @@ public class AddNewContactTests extends AppManager {
         softAssert.assertAll();
     }
 
+    //s
+
 }
