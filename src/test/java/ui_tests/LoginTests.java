@@ -8,6 +8,7 @@ import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.RetryAnalyser;
+import static utils.PropertiesReader.*;
 
 public class LoginTests extends AppManager {
     @Test(retryAnalyzer = RetryAnalyser.class)
@@ -19,11 +20,13 @@ public class LoginTests extends AppManager {
         homePage.clickBtnLogin();
 
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.typeLoginRegistrationForm("alex1khalif9999@gmail.com", "Qwerty474849!");
+        //loginPage.typeLoginRegistrationForm("alex1khalif9999@gmail.com", "Qwerty474849!");
+        loginPage.typeLoginRegistrationForm(getProperty("base.properties", "login"),
+                getProperty("base.properties", "password"));
         loginPage.clickBtnLoginForm();
 
         //ContactPage contactPage = new ContactPage(getDriver());
-       //Assert.assertTrue(contactPage.isAddInDisplayed(), "ERROR");
+        //Assert.assertTrue(contactPage.isAddInDisplayed(), "ERROR");
         Assert.assertTrue(new ContactPage(getDriver()).isTextInBtnAddPresent("ADD"));
 
 
@@ -32,7 +35,8 @@ public class LoginTests extends AppManager {
     @Test
     public void loginPositiveTestWithUser()
     {
-        User user = new User("alex1khalif9999@gmail.com", "Qwerty474849!");
+        User user = new User(getProperty("base.properties", "login"),
+                getProperty("base.properties", "password"));
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLogin();
 
