@@ -16,7 +16,7 @@ public class ContactDataProvider {
     public Iterator<Contact> dataProviderFromFile(){
         List<Contact> list = new ArrayList<>();
         try (BufferedReader bufferedReader =
-                     new BufferedReader(new FileReader("src/test/resources/data_csv/data_contacts1.csv"))){
+                     new BufferedReader(new FileReader("src/test/resources/data_csv/data_contacts2.csv"))){
             String line = bufferedReader.readLine();
             while (line != null){
                 String[] splitArray = line.split(",");
