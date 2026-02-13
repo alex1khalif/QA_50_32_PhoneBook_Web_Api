@@ -70,6 +70,20 @@ public class AddNewContactTests extends AppManager {
         softAssert.assertAll();
     }
 
-    //s
+    @Test(dataProvider = "dataProviderFromFile_WrongPhone", dataProviderClass = ContactDataProvider.class)
+    public void addNewContactNegativeTest_WrongPhoneWithDP(Contact contact){
+        addPage.typeContactForm(contact);
+        Assert.assertTrue(addPage.closeAlertReturnText().contains("Phone not valid: "));
+    }
+
+    @Test(dataProvider = "dataProviderFromFile_Wrong_EmptyField", dataProviderClass = ContactDataProvider.class)
+    public void addNewContactNegativeTest_EmptyFieldWithDP(Contact contact){
+        addPage.typeContactForm(contact);
+        Assert.assertTrue(addPage.isBtnSaveDisabled());
+
+
+
+
+    }
 
 }
