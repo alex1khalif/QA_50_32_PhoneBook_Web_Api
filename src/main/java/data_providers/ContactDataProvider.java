@@ -76,4 +76,25 @@ public class ContactDataProvider {
         return list.listIterator();
 
     }
+
+    @DataProvider
+    public Iterator<Contact> dataProviderFromFile_invalidEmail(){
+        List<Contact> list = new ArrayList<>();
+        try (BufferedReader bufferedReader =
+                     new BufferedReader(new FileReader("src/test/resources/data_csv/dp_email_not_valid.csv"))){
+            String line = bufferedReader.readLine();
+            while (line != null){
+                String[] splitArray = line.split(",");
+                list.add(Contact.builder().name(splitArray[0]).lastName(splitArray[1])
+                        .email(splitArray[3]).phone(splitArray[2]).address(splitArray[4])
+                        .description(splitArray[5]).build());
+                line = bufferedReader.readLine();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+            throw new RuntimeException("IO exception");
+        }
+        return list.listIterator();
+
+    }
 }

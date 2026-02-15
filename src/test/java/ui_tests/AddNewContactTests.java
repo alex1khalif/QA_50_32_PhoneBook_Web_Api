@@ -86,4 +86,10 @@ public class AddNewContactTests extends AppManager {
 
     }
 
+    @Test(dataProvider = "dataProviderFromFile_invalidEmail", dataProviderClass = ContactDataProvider.class)
+    public void addNewContactNegativeTest_InvalidEmailWithDP(Contact contact){
+        addPage.typeContactForm(contact);
+        Assert.assertTrue(addPage.closeAlertReturnText().contains("Email not valid:"));
+    }
+
 }
