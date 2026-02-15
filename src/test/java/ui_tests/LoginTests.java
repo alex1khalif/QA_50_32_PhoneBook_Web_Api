@@ -8,6 +8,9 @@ import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.RetryAnalyser;
+
+import java.lang.reflect.Method;
+
 import static utils.PropertiesReader.*;
 
 public class LoginTests extends AppManager {
@@ -33,10 +36,11 @@ public class LoginTests extends AppManager {
     }
 
     @Test
-    public void loginPositiveTestWithUser()
+    public void loginPositiveTestWithUser(Method method)
     {
         User user = new User(getProperty("base.properties", "login"),
                 getProperty("base.properties", "password"));
+        logger.info("Start test " + method.getName() + " with user " + user);
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLogin();
 
