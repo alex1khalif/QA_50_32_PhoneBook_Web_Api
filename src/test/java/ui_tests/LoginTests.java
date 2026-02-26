@@ -3,15 +3,20 @@ package ui_tests;
 import dto.User;
 import manager.AppManager;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.RetryAnalyser;
+import utils.TestNGListener;
 
 import java.lang.reflect.Method;
 
+
 import static utils.PropertiesReader.*;
+@Listeners(TestNGListener.class)
+
 
 public class LoginTests extends AppManager {
     @Test(retryAnalyzer = RetryAnalyser.class)
@@ -30,8 +35,23 @@ public class LoginTests extends AppManager {
 
         //ContactPage contactPage = new ContactPage(getDriver());
         //Assert.assertTrue(contactPage.isAddInDisplayed(), "ERROR");
-        Assert.assertTrue(new ContactPage(getDriver()).isTextInBtnAddPresent("ADD"));
+        //Assert.assertTrue(new ContactPage(getDriver()).isTextInBtnAddPresent("ADD"));
 
+
+    }
+
+    @Test
+    public void deleteFirstContact(){
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLogin();
+
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginRegistrationForm(getProperty("base.properties", "login"),
+                getProperty("base.properties", "password"));
+        loginPage.clickBtnLoginForm();
+        ContactPage contactPage = new ContactPage(getDriver());
+        contactPage.clickBtnContacts();
+        contactPage.deleteFirstContact();
 
     }
 

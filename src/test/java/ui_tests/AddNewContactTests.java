@@ -48,6 +48,7 @@ public class AddNewContactTests extends AppManager {
 
     }
 
+
     @Test
     public void addNewContactPositiveTest_ClickLastContact(){
         Contact contact = positiveContact();
@@ -91,5 +92,7 @@ public class AddNewContactTests extends AppManager {
         addPage.typeContactForm(contact);
         Assert.assertTrue(addPage.closeAlertReturnText().contains("Email not valid:"));
     }
+
+
 
 }
