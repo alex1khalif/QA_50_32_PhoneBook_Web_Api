@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -74,4 +75,11 @@ public class WDListener implements WebDriverListener {
         WebDriverListener.super.afterMaximize(window);
         logger.info("After Maximize --> " + window.getSize());
     }
+
+    @Override
+    public void afterAnyAlertCall(Alert alert, Method method, Object[] args, Object result) {
+        WebDriverListener.super.afterAnyAlertCall(alert, method, args, result);
+        logger.info("Alert --> " + alert.toString());
+    }
+
 }
