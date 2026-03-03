@@ -2,6 +2,7 @@ package pages;
 
 import dto.Contact;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -161,8 +162,7 @@ public class ContactPage extends BasePage{
         inputLastName.sendKeys(contact.getLastName());
         inputPhone.clear();
         inputPhone.sendKeys(contact.getPhone());
-        inputEmail.clear();
-        inputEmail.sendKeys(contact.getEmail());
+        inputEmail.sendKeys(Keys.chord(Keys.COMMAND, "a"));
         inputAddress.clear();
         inputAddress.sendKeys(contact.getAddress());
         pause(3);
