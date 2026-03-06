@@ -21,7 +21,7 @@ public class AddNewContactTests extends AppManager {
     AddPage addPage;
     int countOfContacts;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login(){
         homePage = new HomePage(getDriver());
         loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
@@ -40,7 +40,7 @@ public class AddNewContactTests extends AppManager {
 
     }
 
-    @Test
+    @Test(groups = {"smoke", "contact"})
     public void addNewContactPositiveTest_WithDataProvider(){
         addPage.typeContactForm(positiveContact());
         int countOfContactsAfterAdd = contactPage.getCountOfContacts();
@@ -87,7 +87,7 @@ public class AddNewContactTests extends AppManager {
 
     }
 
-    @Test(dataProvider = "dataProviderFromFile_invalidEmail", dataProviderClass = ContactDataProvider.class)
+    @Test(groups = "negative", dataProvider = "dataProviderFromFile_invalidEmail", dataProviderClass = ContactDataProvider.class)
     public void addNewContactNegativeTest_InvalidEmailWithDP(Contact contact){
         addPage.typeContactForm(contact);
         Assert.assertTrue(addPage.closeAlertReturnText().contains("Email not valid:"));

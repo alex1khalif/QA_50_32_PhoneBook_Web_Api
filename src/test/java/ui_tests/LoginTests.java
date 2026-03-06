@@ -55,7 +55,7 @@ public class LoginTests extends AppManager {
 
     }
 
-    @Test
+    @Test(groups = {"smoke", "user"})
     public void loginPositiveTestWithUser(Method method)
     {
         User user = new User(getProperty("base.properties", "login"),
@@ -72,7 +72,7 @@ public class LoginTests extends AppManager {
 //        Assert.assertTrue(contactPage.isContactsInDisplayed(), "ERROR");
     }
 
-    @Test
+    @Test(groups = "negative")
     public void loginNegativeTest_WrongEmail(){
         User user = new User("alex1khalif9999gmail.com", "Qwerty474849!");
         HomePage homePage = new HomePage(getDriver());

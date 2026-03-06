@@ -24,7 +24,7 @@ public class AppManager {
         return driver;
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup()
     {
         logger.info("Start testing " + LocalDate.now() + " : " + LocalTime.now());
@@ -38,7 +38,7 @@ public class AppManager {
 
    // (@BeforeMethod) setup --> @Test testName --> (@AfterMethod) tearDown
 
-    @AfterMethod(enabled = false)
+    @AfterMethod(enabled = true, alwaysRun = true)
     public void tearDown()
     {
         logger.info("Stop testing " + LocalDate.now() + " : " + LocalTime.now());

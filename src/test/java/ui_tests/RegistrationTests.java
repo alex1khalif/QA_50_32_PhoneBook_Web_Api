@@ -15,7 +15,7 @@ import static utils.UserFactory.*;
 public class RegistrationTests extends AppManager {
     LoginPage loginPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage() {
         new HomePage(getDriver()).clickBtnLogin();
         loginPage = new LoginPage(getDriver());
@@ -30,7 +30,7 @@ public class RegistrationTests extends AppManager {
         Assert.assertTrue(new ContactPage(getDriver()).isTextInContactPageMessagePresent("No Contacts here!"));
     }
 
-    @Test
+    @Test(groups = {"smoke", "user"})
     public void registrationPositiveTest_WithFaker() {
         User user = positiveUser();
         System.out.println(user);
@@ -50,7 +50,7 @@ public class RegistrationTests extends AppManager {
         Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password format"));
     }
 
-    @Test
+    @Test(groups = "negative")
     public void registrationNegativeTest_WithFaker_EmptyPassword() {
         User user = positiveUser();
         user.setPassword("");
