@@ -2,6 +2,8 @@ package manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 import org.slf4j.Logger;
@@ -17,6 +19,7 @@ import java.time.LocalTime;
 public class AppManager {
     public final static Logger logger = LoggerFactory.getLogger(AppManager.class);
     private WebDriver driver;
+    static String browser = System.getProperty("browser", "chrome");
 
 
     public WebDriver getDriver()
@@ -27,8 +30,20 @@ public class AppManager {
     @BeforeMethod(alwaysRun = true)
     public void setup()
     {
+        switch (browser.toLowerCase()){
+            case "firefox":
+                driver = new FirefoxDriver();
+                System.out.println("Use FireFox");
+                break;
+            case "safari":
+                driver = new SafariDriver();
+                System.out.println("Use Safari");
+            case "chrome":
+                driver = new ChromeDriver();
+                System.out.println("Use Chrome");
+        }
         logger.info("Start testing " + LocalDate.now() + " : " + LocalTime.now());
-        driver = new ChromeDriver();
+       // driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

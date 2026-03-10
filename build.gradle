@@ -19,6 +19,9 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
     implementation 'ch.qos.logback:logback-classic:1.5.18'
 
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
 }
 
 test {
@@ -54,5 +57,13 @@ task different_tests(type: Test){
             'src/test/resources/smoketests.xml'
         }
 
+    }
+}
+
+task browser_tests(type: Test){
+    useTestNG(){
+        if (project.hasProperty('browser'))
+            systemProperty 'browser', "${browser}"
+        suites 'src/test/resources/smoketests.xml'
     }
 }
