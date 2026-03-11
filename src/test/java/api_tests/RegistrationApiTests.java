@@ -47,4 +47,89 @@ public class RegistrationApiTests implements BaseApi {
         Assert.assertEquals(response.code(), 400);
     }
 
+    @Test
+    public void registrationNegative_Wrong_Email_ApiTest(){
+        User user = positiveUser();
+        user.setUsername("alex1khalifgmail.com");
+        System.out.println(user);
+        RequestBody requestBody = RequestBody.create(GSON.toJson(user), JSON);
+        Request request = new Request.Builder().url(BASE_URL + REGISTRATION_URL).post(requestBody).build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //System.out.println(response.code());
+        Assert.assertEquals(response.code(), 400);
+    }
+
+    @Test
+    public void registrationNegative_DuplicateUser_ApiTest(){
+        User user = positiveUser();
+        user.setUsername("alex1khalif1@gmail.com");
+        System.out.println(user);
+        RequestBody requestBody = RequestBody.create(GSON.toJson(user), JSON);
+        Request request = new Request.Builder().url(BASE_URL + REGISTRATION_URL).post(requestBody).build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //System.out.println(response.code());
+        Assert.assertEquals(response.code(), 409);
+    }
+
+    @Test
+    public void registrationNegative_EmptyPassword_ApiTest(){
+        User user = positiveUser();
+        user.setPassword("");
+        System.out.println(user);
+        RequestBody requestBody = RequestBody.create(GSON.toJson(user), JSON);
+        Request request = new Request.Builder().url(BASE_URL + REGISTRATION_URL).post(requestBody).build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //System.out.println(response.code());
+        Assert.assertEquals(response.code(), 400);
+    }
+
+    @Test
+    public void registrationNegative_SpaceInPassword_ApiTest(){
+        User user = positiveUser();
+        user.setPassword("          "); // 10
+        System.out.println(user);
+        RequestBody requestBody = RequestBody.create(GSON.toJson(user), JSON);
+        Request request = new Request.Builder().url(BASE_URL + REGISTRATION_URL).post(requestBody).build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //System.out.println(response.code());
+        Assert.assertEquals(response.code(), 400);
+    }
+
+    @Test
+    public void registrationNegative_Wrong_Email_WithCapsLock_ApiTest(){
+        User user = positiveUser();
+        user.setUsername(user.getUsername().toUpperCase());
+        System.out.println(user);
+        RequestBody requestBody = RequestBody.create(GSON.toJson(user), JSON);
+        Request request = new Request.Builder().url(BASE_URL + REGISTRATION_URL).post(requestBody).build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //System.out.println(response.code());
+        Assert.assertEquals(response.code(), 400); // Actual 200
+    }
+
 }
