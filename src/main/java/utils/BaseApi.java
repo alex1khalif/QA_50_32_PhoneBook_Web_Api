@@ -12,10 +12,13 @@ public interface BaseApi {
     String GET_ALL_CONTACTS_URL = "/v1/contacts";
     String EDIT_CONTACT_URL = "/v1/contacts";
     String DELETE_CONTACT_URL = "/v1/contacts/";
+    String AUTH = "Authorization";
 
 
     Gson GSON = new Gson();
 
     MediaType JSON = MediaType.get("application/json");
     OkHttpClient OK_HTTP_CLIENT = new OkHttpClient();
+    MediaType TEXT = MediaType.get("text/plain");
+
 }
